@@ -1,0 +1,172 @@
+---
+type Project = {
+  title: string;
+  year: string;
+  description: string;
+  tech: string[];
+  github?: string;
+  link?: string;
+  tag?: string;
+  coverBg: string;
+  coverIcon: string;
+};
+
+const projects: Project[] = [
+  {
+    title: 'Journey Sync',
+    year: '2024',
+    description: 'Multi-route bus booking system with real-time availability, route management, and a seamless booking experience for passengers.',
+    tech: ['Express.js', 'MongoDB', 'HTML', 'CSS'],
+    github: 'https://github.com/addithyan/busbooking',
+    tag: 'Transport',
+    coverBg: 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',
+    coverIcon: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`,
+  },
+  {
+    title: 'DataHive',
+    year: '2025',
+    description: 'An LLM-powered educational management platform with context-aware RAG architecture for efficient organisation, retrieval, and interaction with college data.',
+    tech: ['React', 'FastAPI', 'LLaMA 3.1', 'FAISS', 'Firebase'],
+    github: 'https://github.com/addithyan/locally-running-llm-powered-lms-DataHive',
+    tag: 'AI / ML',
+    coverBg: 'linear-gradient(135deg, #0d0d1a 0%, #1a0533 50%, #0d1a33 100%)',
+    coverIcon: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(124,58,237,0.7)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+  },
+  {
+    title: 'Medi Validator',
+    year: '2025',
+    description: 'Full-stack medical claim validation platform used by healthcare professionals. Built as a multi-tenant application with RBAC, bulk processing, and background workflows.',
+    tech: ['Django', 'React', 'MySQL', 'Celery', 'Redis'],
+    link: 'https://medivalidator.in/login',
+    tag: 'Healthcare',
+    coverBg: 'linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0a2818 100%)',
+    coverIcon: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(34,197,94,0.65)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+  },
+  {
+    title: 'Eligibility System',
+    year: '2025',
+    description: 'Automated eligibility verification system that validates patient insurance across multiple portals with fast caching and optimised data processing.',
+    tech: ['Django', 'React', 'MySQL', 'Redis'],
+    link: 'https://eligibility.medivalidator.in/login',
+    tag: 'Insurance',
+    coverBg: 'linear-gradient(135deg, #0f1923 0%, #1a2535 50%, #0f2030 100%)',
+    coverIcon: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.65)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  },
+  {
+    title: 'CoolFixz Solutions',
+    year: '2025',
+    description: 'Suite of business tools including a billing system, automated tag generator, and landing pages for Solar and HVAC divisions.',
+    tech: ['React', 'Django', 'Tailwind CSS'],
+    link: 'https://solar.coolfixz.com',
+    tag: 'Business',
+    coverBg: 'linear-gradient(135deg, #1a1200 0%, #2a1f00 50%, #1a2200 100%)',
+    coverIcon: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(251,191,36,0.65)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+  },
+];
+---
+
+<section
+  id="projects"
+  class="py-28 px-6"
+  aria-labelledby="projects-heading"
+>
+  <div class="max-w-6xl mx-auto">
+    <div class="section-reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-xs text-accent-cyan tracking-widest uppercase">03 / Projects</span>
+        <span class="h-px flex-1 bg-white/5" aria-hidden="true" />
+      </div>
+
+      <h2
+        id="projects-heading"
+        class="font-display text-4xl md:text-5xl font-bold text-text-primary mb-14 tracking-tight"
+      >
+        Things I've <span class="gradient-text">built</span>
+      </h2>
+
+      <!-- Project list — image-left layout like reference -->
+      <div class="space-y-6">
+        {
+          projects.map((project) => (
+            <article class="group grid md:grid-cols-[280px_1fr] rounded-2xl border border-white/6 bg-surface-1/40 hover:border-white/15 hover:bg-surface-2/50 transition-all duration-300 overflow-hidden">
+              <!-- Cover image area -->
+              <div
+                class="relative flex items-center justify-center min-h-[160px] md:min-h-[190px] overflow-hidden"
+                style={`background: ${project.coverBg};`}
+                aria-hidden="true"
+              >
+                <div set:html={project.coverIcon} />
+                <!-- Subtle overlay on hover -->
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style="background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(124,58,237,0.08));" />
+              </div>
+
+              <!-- Content -->
+              <div class="p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                  <!-- Header row -->
+                  <div class="flex items-start justify-between gap-3 mb-3">
+                    <div>
+                      <h3 class="text-lg font-semibold text-text-primary font-display group-hover:text-white transition-colors">
+                        {project.title}
+                      </h3>
+                      <p class="text-xs text-text-muted font-mono mt-0.5">{project.year}</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0 mt-0.5">
+                      {project.tag && (
+                        <span class="px-2.5 py-1 rounded-md text-xs text-text-muted border border-white/6 bg-white/3 font-mono">
+                          {project.tag}
+                        </span>
+                      )}
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 bg-white/3 text-text-muted hover:text-text-primary hover:border-white/20 transition-all duration-200"
+                          aria-label={`GitHub repository for ${project.title}`}
+                        >
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                          </svg>
+                        </a>
+                      )}
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 bg-white/3 text-text-muted hover:text-text-primary hover:border-white/20 transition-all duration-200"
+                          aria-label={`Live link for ${project.title}`}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <p class="text-sm text-text-muted leading-relaxed mb-5 font-light">
+                    {project.description}
+                  </p>
+                </div>
+
+                <!-- Tech stack -->
+                <div class="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span class="px-2.5 py-1 rounded-md text-xs text-text-muted bg-white/3 border border-white/5 font-mono">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

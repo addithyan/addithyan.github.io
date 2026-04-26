@@ -1,0 +1,113 @@
+---
+type Experience = {
+  role: string;
+  company: string;
+  period: string;
+  current: boolean;
+  bullets: string[];
+};
+
+const experiences: Experience[] = [
+  {
+    role: 'Full Stack Developer',
+    company: 'Grey Codes Solutions LLC',
+    period: 'Feb 2026 – Present',
+    current: true,
+    bullets: [
+      'Developed scalable web applications using Django, React, and REST APIs',
+      'Built backend logic, integrated databases, and created responsive UIs, delivering projects on time',
+      'Optimized features, resolved bugs, and ensured smooth deployment using Git',
+    ],
+  },
+  {
+    role: 'Support Engineer',
+    company: 'Grey Codes Solutions LLC',
+    period: 'Aug 2025 – Feb 2026',
+    current: false,
+    bullets: [
+      'Provided technical support and resolved application issues in real time',
+      'Debugged backend and frontend issues, resolved bugs, and monitored system performance',
+      'Utilized Git for version control and ensured seamless integration',
+    ],
+  },
+];
+---
+
+<section
+  id="experience"
+  class="py-28 px-6 bg-surface-1/30"
+  aria-labelledby="experience-heading"
+>
+  <div class="max-w-6xl mx-auto">
+    <div class="section-reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-xs text-accent-violet tracking-widest uppercase">02 / Experience</span>
+        <span class="h-px flex-1 bg-white/5" aria-hidden="true" />
+      </div>
+
+      <h2
+        id="experience-heading"
+        class="font-display text-4xl md:text-5xl font-bold text-text-primary mb-14 tracking-tight"
+      >
+        Where I've <span class="gradient-text">worked</span>
+      </h2>
+
+      <div class="relative">
+        <!-- Timeline line -->
+        <div
+          class="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-accent-blue/50 via-accent-violet/30 to-transparent ml-[7px]"
+          aria-hidden="true"
+        />
+
+        <div class="space-y-10">
+          {
+            experiences.map((exp) => (
+              <article class="md:pl-10 relative group">
+                <!-- Dot -->
+                <div
+                  class="hidden md:block absolute left-0 top-2 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 group-hover:scale-125"
+                  style={exp.current
+                    ? 'border-color: #3b82f6; background: #3b82f6; box-shadow: 0 0 12px rgba(59,130,246,0.5);'
+                    : 'border-color: #3b3b55; background: #0a0a0f;'}
+                  aria-hidden="true"
+                />
+
+                <div class="p-6 md:p-8 rounded-2xl border border-white/6 bg-surface-1/50 hover:border-white/12 hover:bg-surface-2/60 transition-all duration-300">
+                  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6">
+                    <div>
+                      <h3 class="text-lg font-semibold text-text-primary font-display">{exp.role}</h3>
+                      <p class="text-sm text-text-muted mt-0.5">{exp.company}</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                      {exp.current && (
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-accent-blue/10 text-accent-blue border border-accent-blue/20">
+                          <span class="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" aria-hidden="true" />
+                          Current
+                        </span>
+                      )}
+                      <span class="px-3 py-1 rounded-full text-xs text-text-muted border border-white/6 bg-white/3 font-mono">
+                        {exp.period}
+                      </span>
+                    </div>
+                  </div>
+
+                  <ul class="space-y-3" role="list">
+                    {exp.bullets.map((bullet) => (
+                      <li class="flex gap-3 text-sm text-text-secondary leading-relaxed">
+                        <span
+                          class="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-accent-violet/60"
+                          aria-hidden="true"
+                        />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

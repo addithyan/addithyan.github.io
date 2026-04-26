@@ -1,0 +1,284 @@
+---
+---
+
+<section
+  id="contact"
+  class="py-28 px-6 bg-surface-1/30"
+  aria-labelledby="contact-heading"
+>
+  <div class="max-w-6xl mx-auto">
+    <div class="section-reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-xs text-accent-blue tracking-widest uppercase">04 / Contact</span>
+        <span class="h-px flex-1 bg-white/5" aria-hidden="true" />
+      </div>
+
+      <h2
+        id="contact-heading"
+        class="font-display text-4xl md:text-5xl font-bold text-text-primary mb-4 tracking-tight"
+      >
+        Let's <span class="gradient-text">connect</span>
+      </h2>
+      <p class="text-text-muted text-base mb-14 max-w-lg font-light">
+        Have a project in mind or want to work together? I'd love to hear from you.
+      </p>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-stretch">
+        <!-- Left info -->
+        <div class="flex flex-col gap-5">
+          {[
+            {
+              icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+              label: 'Email',
+              value: 'adithyanb12b@gmail.com',
+              href: 'mailto:adithyanb12b@gmail.com',
+            },
+            {
+              icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+              label: 'Phone',
+              value: '+91 98954 24559',
+              href: 'tel:+919895424559',
+            },
+            {
+              icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+              label: 'Location',
+              value: 'Kottayam, Kerala, India',
+              href: null,
+            },
+          ].map((item) => (
+            <div class="flex items-start gap-4 p-5 rounded-xl border border-white/6 bg-surface-1/40 hover:border-white/12 transition-colors duration-300">
+              <div
+                class="w-11 h-11 rounded-xl flex items-center justify-center text-accent-blue shrink-0"
+                style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);"
+                aria-hidden="true"
+                set:html={item.icon}
+              />
+              <div>
+                <p class="text-xs font-mono text-text-muted mb-1 tracking-wide">{item.label}</p>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    class="text-sm text-text-secondary hover:text-text-primary transition-colors"
+                  >
+                    {item.value}
+                  </a>
+                ) : (
+                  <p class="text-sm text-text-secondary">{item.value}</p>
+                )}
+              </div>
+            </div>
+          ))}
+
+          <!-- Socials -->
+          <div class="mt-auto p-5 rounded-xl border border-white/6 bg-surface-1/40 hover:border-white/12 transition-colors duration-300">
+            <p class="text-xs font-mono text-text-muted mb-4 tracking-wide uppercase">Elsewhere</p>
+            <div class="flex gap-3">
+              <a
+                href="https://github.com/addithyan"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/6 text-text-muted hover:text-text-primary hover:border-white/15 transition-all duration-200 text-sm"
+                aria-label="GitHub"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/adithyan-b-637a66229"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/6 text-text-muted hover:text-text-primary hover:border-white/15 transition-all duration-200 text-sm"
+                aria-label="LinkedIn"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="p-7 md:p-9 rounded-2xl border border-white/6 bg-surface-1/50">
+          <form id="contact-form" novalidate aria-label="Contact form">
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label for="from_name" class="block text-xs font-mono text-text-muted mb-2 tracking-wide">
+                  Name <span class="text-accent-violet" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="from_name"
+                  name="from_name"
+                  required
+                  placeholder="John Doe"
+                  class="contact-input w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+                  aria-required="true"
+                />
+                <p class="error-msg text-xs text-red-400 mt-1 hidden" id="name-error" role="alert">Please enter your name</p>
+              </div>
+              <div>
+                <label for="from_email" class="block text-xs font-mono text-text-muted mb-2 tracking-wide">
+                  Email <span class="text-accent-violet" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="from_email"
+                  name="from_email"
+                  required
+                  placeholder="john@example.com"
+                  class="contact-input w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+                  aria-required="true"
+                />
+                <p class="error-msg text-xs text-red-400 mt-1 hidden" id="email-error" role="alert">Please enter a valid email</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="phone" class="block text-xs font-mono text-text-muted mb-2 tracking-wide">
+                Phone
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+91 00000 00000"
+                class="contact-input w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              />
+            </div>
+
+            <div class="mb-6">
+              <label for="message" class="block text-xs font-mono text-text-muted mb-2 tracking-wide">
+                Message <span class="text-accent-violet" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                placeholder="Tell me about your project or opportunity..."
+                class="contact-input w-full px-4 py-3 rounded-xl text-sm transition-all duration-200 resize-none"
+                aria-required="true"
+              />
+              <p class="error-msg text-xs text-red-400 mt-1 hidden" id="msg-error" role="alert">Please enter a message</p>
+            </div>
+
+            <div id="success-msg" class="hidden mb-4 p-3 rounded-xl border border-green-500/25 bg-green-500/10 text-green-400 text-sm text-center" role="status" aria-live="polite">
+              Message sent successfully. I'll get back to you soon.
+            </div>
+            <div id="error-msg-global" class="hidden mb-4 p-3 rounded-xl border border-red-500/25 bg-red-500/10 text-red-400 text-sm text-center" role="alert" aria-live="assertive">
+              Something went wrong. Please try again or email me directly.
+            </div>
+
+            <button
+              type="submit"
+              id="submit-btn"
+              class="w-full py-3.5 px-6 rounded-xl text-sm font-semibold text-white transition-all duration-300 relative overflow-hidden"
+              style="background: linear-gradient(135deg, #3b82f6, #7c3aed);"
+            >
+              <span id="btn-text">Send Message</span>
+              <span id="btn-loading" class="hidden items-center justify-center gap-2">
+                <svg class="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                </svg>
+                Sending...
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Theme-aware form inputs */
+  .contact-input {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #f0f0ff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .contact-input::placeholder {
+    color: rgba(90, 90, 122, 0.9);
+  }
+
+  .contact-input:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.25);
+  }
+
+  :global(html.light) .contact-input {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: #0f0f1a;
+    border-color: rgba(0, 0, 0, 0.10);
+  }
+
+  :global(html.light) .contact-input::placeholder {
+    color: rgba(90, 90, 122, 0.7);
+  }
+</style>
+
+<script>
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  script.async = true;
+  script.onload = () => {
+    (window as any).emailjs.init('muuQzhzeKzqoFwGyh');
+  };
+  document.head.appendChild(script);
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text') as HTMLElement;
+  const btnLoading = document.getElementById('btn-loading') as HTMLElement;
+  const successMsg = document.getElementById('success-msg') as HTMLElement;
+  const errorMsgGlobal = document.getElementById('error-msg-global') as HTMLElement;
+
+  function showError(id: string, visible: boolean) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden', !visible);
+  }
+
+  function validateForm(): boolean {
+    let valid = true;
+    const name = (document.getElementById('from_name') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('from_email') as HTMLInputElement).value.trim();
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+    showError('name-error', !name);
+    if (!name) valid = false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    showError('email-error', !emailRegex.test(email));
+    if (!emailRegex.test(email)) valid = false;
+    showError('msg-error', !message);
+    if (!message) valid = false;
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+    submitBtn.disabled = true;
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+    btnLoading.style.display = 'flex';
+    successMsg.classList.add('hidden');
+    errorMsgGlobal.classList.add('hidden');
+    try {
+      await (window as any).emailjs.sendForm('service_vh117rv', 'template_2q6ewjt', form);
+      successMsg.classList.remove('hidden');
+      form.reset();
+    } catch {
+      errorMsgGlobal.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      btnText.classList.remove('hidden');
+      btnLoading.classList.add('hidden');
+      btnLoading.style.display = '';
+    }
+  });
+</script>
