@@ -84,11 +84,10 @@ const projects: Project[] = [
         Things I've <span class="gradient-text">built</span>
       </h2>
 
-      <!-- Project list — image-left layout like reference -->
       <div class="space-y-6">
         {
           projects.map((project) => (
-            <article class="group grid md:grid-cols-[280px_1fr] rounded-2xl border border-white/6 bg-surface-1/40 hover:border-white/15 hover:bg-surface-2/50 transition-all duration-300 overflow-hidden">
+            <article class="project-card group grid md:grid-cols-[280px_1fr] rounded-2xl border border-white/6 bg-surface-1/40 transition-all duration-300 overflow-hidden">
               <!-- Cover image area -->
               <div
                 class="relative flex items-center justify-center min-h-[160px] md:min-h-[190px] overflow-hidden"
@@ -96,9 +95,8 @@ const projects: Project[] = [
                 aria-hidden="true"
               >
                 <div set:html={project.coverIcon} />
-                <!-- Subtle overlay on hover -->
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style="background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(124,58,237,0.08));" />
+                <div class="cover-overlay absolute inset-0 opacity-0 transition-opacity duration-500"
+                  style="background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(124,58,237,0.12));" />
               </div>
 
               <!-- Content -->
@@ -114,7 +112,7 @@ const projects: Project[] = [
                     </div>
                     <div class="flex items-center gap-2 shrink-0 mt-0.5">
                       {project.tag && (
-                        <span class="px-2.5 py-1 rounded-md text-xs text-text-muted border border-white/6 bg-white/3 font-mono">
+                        <span class="tag-badge px-2.5 py-1 rounded-md text-xs text-text-muted border border-white/6 bg-white/3 font-mono transition-all duration-200">
                           {project.tag}
                         </span>
                       )}
@@ -123,7 +121,7 @@ const projects: Project[] = [
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 bg-white/3 text-text-muted hover:text-text-primary hover:border-white/20 transition-all duration-200"
+                          class="link-btn w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 bg-white/3 text-text-muted transition-all duration-200"
                           aria-label={`GitHub repository for ${project.title}`}
                         >
                           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -136,7 +134,7 @@ const projects: Project[] = [
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 bg-white/3 text-text-muted hover:text-text-primary hover:border-white/20 transition-all duration-200"
+                          class="link-btn w-8 h-8 flex items-center justify-center rounded-lg border border-white/8 bg-white/3 text-text-muted transition-all duration-200"
                           aria-label={`Live link for ${project.title}`}
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -157,7 +155,7 @@ const projects: Project[] = [
                 <!-- Tech stack -->
                 <div class="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
-                    <span class="px-2.5 py-1 rounded-md text-xs text-text-muted bg-white/3 border border-white/5 font-mono">
+                    <span class="tech-tag px-2.5 py-1 rounded-md text-xs text-text-muted bg-white/3 border border-white/5 font-mono transition-all duration-200">
                       {t}
                     </span>
                   ))}
@@ -170,3 +168,13 @@ const projects: Project[] = [
     </div>
   </div>
 </section>
+
+<style>
+  /* ── Project card cover overlay still fades on hover for visual interest ── */
+  /* No border/glow hover effects — static premium cards */
+
+  /* ── Link buttons — keep minimal color shift only (functional feedback) ── */
+  .link-btn:hover {
+    color: var(--text-primary);
+  }
+</style>

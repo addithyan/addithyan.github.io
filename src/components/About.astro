@@ -48,7 +48,7 @@ const skills: SkillGroup[] = [
             { value: '5+', label: 'Projects Built' },
             { value: '1', label: 'Company' },
           ].map((stat) => (
-            <div class="p-5 rounded-xl border border-white/6 bg-surface-1/50 text-center">
+            <div class="stat-card p-5 rounded-xl border border-white/6 bg-surface-1/50 text-center transition-all duration-300 cursor-default">
               <p class="font-display text-3xl font-bold gradient-text">{stat.value}</p>
               <p class="text-xs text-text-muted mt-1 font-mono tracking-wide">{stat.label}</p>
             </div>
@@ -56,15 +56,15 @@ const skills: SkillGroup[] = [
         </div>
       </div>
 
-      <!-- Right: skills + education (same height via flex) -->
+      <!-- Right: skills + education -->
       <div class="flex flex-col gap-5">
         {
           skills.map((group) => (
-            <div class="p-5 rounded-xl border border-white/6 bg-surface-1/40 hover:border-white/12 transition-colors duration-300">
+            <div class="skill-card p-5 rounded-xl border border-white/6 bg-surface-1/40 transition-all duration-300 cursor-default">
               <p class="text-xs font-mono text-text-muted mb-3 tracking-widest uppercase">{group.label}</p>
               <div class="flex flex-wrap gap-2">
                 {group.items.map((skill) => (
-                  <span class="px-3 py-1.5 rounded-lg text-sm text-text-secondary bg-white/4 border border-white/6 hover:border-accent-blue/30 hover:text-text-primary transition-all duration-200">
+                  <span class="skill-tag px-3 py-1.5 rounded-lg text-sm text-text-secondary bg-white/4 border border-white/6 transition-all duration-200 cursor-default">
                     {skill}
                   </span>
                 ))}
@@ -74,7 +74,7 @@ const skills: SkillGroup[] = [
         }
 
         <!-- Education -->
-        <div class="flex-1 p-5 rounded-xl border border-white/6 bg-surface-1/40 hover:border-white/12 transition-colors duration-300">
+        <div class="skill-card flex-1 p-5 rounded-xl border border-white/6 bg-surface-1/40 transition-all duration-300 cursor-default">
           <p class="text-xs font-mono text-text-muted mb-4 tracking-widest uppercase">Education</p>
           <div class="space-y-4">
             <div>
@@ -92,3 +92,7 @@ const skills: SkillGroup[] = [
     </div>
   </div>
 </section>
+
+<style>
+  /* No hover effects — static premium cards */
+</style>

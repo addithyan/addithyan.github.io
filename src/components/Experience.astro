@@ -2,6 +2,7 @@
 type Experience = {
   role: string;
   company: string;
+  companyUrl?: string;
   period: string;
   current: boolean;
   bullets: string[];
@@ -11,6 +12,7 @@ const experiences: Experience[] = [
   {
     role: 'Full Stack Developer',
     company: 'Grey Codes Solutions LLC',
+    companyUrl: 'https://www.greycodes.ae/',
     period: 'Feb 2026 – Present',
     current: true,
     bullets: [
@@ -22,6 +24,7 @@ const experiences: Experience[] = [
   {
     role: 'Support Engineer',
     company: 'Grey Codes Solutions LLC',
+    companyUrl: 'https://www.greycodes.ae/',
     period: 'Aug 2025 – Feb 2026',
     current: false,
     bullets: [
@@ -72,11 +75,27 @@ const experiences: Experience[] = [
                   aria-hidden="true"
                 />
 
-                <div class="p-6 md:p-8 rounded-2xl border border-white/6 bg-surface-1/50 hover:border-white/12 hover:bg-surface-2/60 transition-all duration-300">
+                <div class="experience-card p-6 md:p-8 rounded-2xl border border-white/6 bg-surface-1/50 transition-all duration-300 cursor-default">
                   <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6">
                     <div>
                       <h3 class="text-lg font-semibold text-text-primary font-display">{exp.role}</h3>
-                      <p class="text-sm text-text-muted mt-0.5">{exp.company}</p>
+                      {exp.companyUrl ? (
+                        <a
+                          href={exp.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-sm text-text-muted mt-0.5 hover:text-accent-blue transition-colors duration-200 inline-flex items-center gap-1 group/link"
+                        >
+                          {exp.company}
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-hover/link:opacity-100 transition-opacity" aria-hidden="true">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                          </svg>
+                        </a>
+                      ) : (
+                        <p class="text-sm text-text-muted mt-0.5">{exp.company}</p>
+                      )}
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
                       {exp.current && (
@@ -111,3 +130,7 @@ const experiences: Experience[] = [
     </div>
   </div>
 </section>
+
+<style>
+  /* No hover effects — static premium cards */
+</style>

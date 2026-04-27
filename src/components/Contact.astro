@@ -46,7 +46,7 @@
               href: null,
             },
           ].map((item) => (
-            <div class="flex items-start gap-4 p-5 rounded-xl border border-white/6 bg-surface-1/40 hover:border-white/12 transition-colors duration-300">
+            <div class="contact-info-card flex items-start gap-4 p-5 rounded-xl border border-white/6 bg-surface-1/40 transition-all duration-300 cursor-default">
               <div
                 class="w-11 h-11 rounded-xl flex items-center justify-center text-accent-blue shrink-0"
                 style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);"
@@ -70,14 +70,14 @@
           ))}
 
           <!-- Socials -->
-          <div class="mt-auto p-5 rounded-xl border border-white/6 bg-surface-1/40 hover:border-white/12 transition-colors duration-300">
+          <div class="contact-info-card mt-auto p-5 rounded-xl border border-white/6 bg-surface-1/40 transition-all duration-300 cursor-default">
             <p class="text-xs font-mono text-text-muted mb-4 tracking-wide uppercase">Elsewhere</p>
             <div class="flex gap-3">
               <a
                 href="https://github.com/addithyan"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/6 text-text-muted hover:text-text-primary hover:border-white/15 transition-all duration-200 text-sm"
+                class="social-btn flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/6 text-text-muted transition-all duration-200 text-sm"
                 aria-label="GitHub"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -89,7 +89,7 @@
                 href="https://linkedin.com/in/adithyan-b-637a66229"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/6 text-text-muted hover:text-text-primary hover:border-white/15 transition-all duration-200 text-sm"
+                class="social-btn flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-white/6 text-text-muted transition-all duration-200 text-sm"
                 aria-label="LinkedIn"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -102,7 +102,7 @@
         </div>
 
         <!-- Right: Form -->
-        <div class="p-7 md:p-9 rounded-2xl border border-white/6 bg-surface-1/50">
+        <div class="contact-form-card p-7 md:p-9 rounded-2xl border border-white/6 bg-surface-1/50 transition-all duration-300">
           <form id="contact-form" novalidate aria-label="Contact form">
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
               <div>
@@ -195,7 +195,19 @@
 </section>
 
 <style>
-  /* Theme-aware form inputs */
+  /* ── Contact info cards — no hover effects ── */
+
+  /* ── Social buttons — minimal color shift only ── */
+  .social-btn:hover {
+    color: var(--text-primary);
+  }
+
+  /* ── Contact form card ── */
+  .contact-form-card:focus-within {
+    border-color: rgba(59, 130, 246, 0.25);
+  }
+
+  /* ── Form inputs ── */
   .contact-input {
     background-color: rgba(255, 255, 255, 0.04);
     color: #f0f0ff;

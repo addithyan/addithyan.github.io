@@ -26,22 +26,27 @@
     --scrollbar-thumb: #3b3b55;
   }
 
+  /* ═══════════════════════════════════════════
+     PREMIUM LIGHT MODE
+     Warm, creamy off-white — not plain grey.
+     Deep navy text, precise shadows, glass cards.
+  ═══════════════════════════════════════════ */
   html.light {
-    --bg-primary: #f4f4f8;
-    --bg-surface1: rgba(0,0,0,0.03);
-    --bg-surface2: rgba(0,0,0,0.05);
-    --text-primary: #0f0f1a;
-    --text-secondary: #3a3a5c;
-    --text-muted: #7a7a9a;
-    --border-subtle: rgba(0,0,0,0.08);
-    --border-hover: rgba(0,0,0,0.15);
-    --nav-bg: rgba(244,244,248,0.9);
-    --input-bg: rgba(0,0,0,0.04);
-    --input-text: #0f0f1a;
-    --input-placeholder: #9a9ab0;
-    --card-bg: rgba(0,0,0,0.02);
-    --scrollbar-track: #f4f4f8;
-    --scrollbar-thumb: #b0b0cc;
+    --bg-primary: #f7f7fb;
+    --bg-surface1: rgba(255,255,255,0.75);
+    --bg-surface2: rgba(255,255,255,0.9);
+    --text-primary: #0d0d1f;
+    --text-secondary: #2e2e52;
+    --text-muted: #6b6b96;
+    --border-subtle: rgba(59,130,246,0.09);
+    --border-hover: rgba(59,130,246,0.22);
+    --nav-bg: rgba(247,247,251,0.88);
+    --input-bg: rgba(255,255,255,0.85);
+    --input-text: #0d0d1f;
+    --input-placeholder: #9898b8;
+    --card-bg: rgba(255,255,255,0.7);
+    --scrollbar-track: #f7f7fb;
+    --scrollbar-thumb: #c5c5e0;
   }
 
   html {
@@ -56,7 +61,7 @@
   }
 
   ::selection {
-    background: rgba(124, 58, 237, 0.35);
+    background: rgba(124, 58, 237, 0.2);
     color: var(--text-primary);
   }
 
@@ -139,7 +144,7 @@ input:focus, textarea:focus {
   opacity: 0.3;
 }
 
-/* Mesh gradient background */
+/* Mesh gradient background — dark */
 .mesh-bg {
   background-color: var(--bg-primary);
   background-image:
@@ -148,11 +153,14 @@ input:focus, textarea:focus {
     radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.03) 0%, transparent 70%);
 }
 
+/* Mesh gradient background — light (softer, warmer) */
 html.light .mesh-bg {
+  background-color: #f7f7fb;
   background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.02) 0%, transparent 70%);
+    radial-gradient(ellipse at 15% 15%, rgba(59, 130, 246, 0.07) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 85%, rgba(124, 58, 237, 0.06) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 0%,  rgba(6, 182, 212, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
 }
 
 /* Theme toggle button */
@@ -160,21 +168,89 @@ html.light .mesh-bg {
   transition: all 0.3s ease;
 }
 
-/* Light mode border adjustments */
-html.light .border-white\/6 { border-color: rgba(0,0,0,0.07) !important; }
-html.light .border-white\/8 { border-color: rgba(0,0,0,0.09) !important; }
-html.light .border-white\/10 { border-color: rgba(0,0,0,0.11) !important; }
-html.light .border-white\/5 { border-color: rgba(0,0,0,0.06) !important; }
-html.light .border-white\/12 { border-color: rgba(0,0,0,0.13) !important; }
-html.light .border-white\/15 { border-color: rgba(0,0,0,0.16) !important; }
-html.light .bg-white\/3 { background-color: rgba(0,0,0,0.03) !important; }
-html.light .bg-white\/4 { background-color: rgba(0,0,0,0.04) !important; }
-html.light .bg-white\/5 { background-color: rgba(0,0,0,0.05) !important; }
-html.light .bg-white\/6 { background-color: rgba(0,0,0,0.06) !important; }
-html.light .text-text-primary { color: #0f0f1a !important; }
-html.light .text-text-secondary { color: #3a3a5c !important; }
-html.light .text-text-muted { color: #7a7a9a !important; }
-html.light .bg-surface-1\/30, html.light .bg-surface-1\/40, html.light .bg-surface-1\/50 { background-color: rgba(0,0,0,0.025) !important; }
-html.light .bg-surface-2\/50, html.light .bg-surface-2\/60 { background-color: rgba(0,0,0,0.04) !important; }
-html.light .h-px.bg-white\/5 { background-color: rgba(0,0,0,0.07) !important; }
-html.light body { background-color: #f4f4f8; color: #0f0f1a; }
+/* ═══════════════════════════════════════════
+   LIGHT MODE — OVERRIDES
+   Glass cards, precise borders, deep shadows
+═══════════════════════════════════════════ */
+
+/* Borders */
+html.light .border-white\/6  { border-color: rgba(59,130,246,0.09) !important; }
+html.light .border-white\/8  { border-color: rgba(59,130,246,0.11) !important; }
+html.light .border-white\/10 { border-color: rgba(59,130,246,0.13) !important; }
+html.light .border-white\/5  { border-color: rgba(59,130,246,0.07) !important; }
+html.light .border-white\/12 { border-color: rgba(59,130,246,0.15) !important; }
+html.light .border-white\/15 { border-color: rgba(59,130,246,0.18) !important; }
+
+/* Backgrounds */
+html.light .bg-white\/3  { background-color: rgba(255,255,255,0.7) !important; }
+html.light .bg-white\/4  { background-color: rgba(255,255,255,0.78) !important; }
+html.light .bg-white\/5  { background-color: rgba(255,255,255,0.82) !important; }
+html.light .bg-white\/6  { background-color: rgba(255,255,255,0.86) !important; }
+
+/* Surface layers — glassy white */
+html.light .bg-surface-1\/30,
+html.light .bg-surface-1\/40,
+html.light .bg-surface-1\/50 {
+  background-color: rgba(255,255,255,0.65) !important;
+  backdrop-filter: blur(8px);
+}
+
+html.light .bg-surface-2\/50,
+html.light .bg-surface-2\/60 {
+  background-color: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Dividers */
+html.light .h-px.bg-white\/5 {
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.15), transparent) !important;
+}
+
+/* Text */
+html.light .text-text-primary   { color: #0d0d1f !important; }
+html.light .text-text-secondary { color: #2e2e52 !important; }
+html.light .text-text-muted     { color: #6b6b96 !important; }
+
+/* Body */
+html.light body {
+  background-color: #f7f7fb;
+  color: #0d0d1f;
+}
+
+/* Cards — glass effect with subtle shadow */
+html.light [class*="rounded-xl"],
+html.light [class*="rounded-2xl"] {
+  box-shadow: 0 1px 3px rgba(59,130,246,0.04), 0 4px 16px rgba(59,130,246,0.04);
+}
+
+/* Navbar — glass blur */
+html.light #navbar[style*="background"] {
+  background: rgba(247,247,251,0.88) !important;
+  border-bottom-color: rgba(59,130,246,0.1) !important;
+}
+
+/* Timeline dot (experience) in light */
+html.light .experience-card,
+html.light .skill-card,
+html.light .stat-card,
+html.light .project-card,
+html.light .contact-info-card,
+html.light .contact-form-card {
+  box-shadow: 0 1px 4px rgba(59,130,246,0.05), 0 6px 20px rgba(59,130,246,0.05);
+  backdrop-filter: blur(6px);
+}
+
+/* No hover/active overrides for cards — static premium look */
+
+/* Experience timeline dot in light mode */
+html.light [style*="border-color: #3b3b55"] {
+  border-color: #c5c5e0 !important;
+  background: #f7f7fb !important;
+}
+
+/* Mobile menu */
+html.light #mobile-menu {
+  background: rgba(247,247,251,0.96);
+  border-top-color: rgba(59,130,246,0.1) !important;
+  backdrop-filter: blur(16px);
+}
