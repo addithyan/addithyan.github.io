@@ -1,138 +1,255 @@
 ---
 ---
 
-<section
-  id="hero"
-  class="relative min-h-screen flex flex-col justify-center px-6 pt-24 pb-16 overflow-hidden"
-  aria-label="Introduction"
->
-  <!-- Background grid -->
-  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <div
-      class="absolute inset-0"
-      style="background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px;"
-    />
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
-      style="background: radial-gradient(circle, #3b82f6 0%, transparent 70%);" />
-    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl"
-      style="background: radial-gradient(circle, #7c3aed 0%, transparent 70%); opacity: 0.08;" />
+<style>
+  /* ── Loading overlay ── */
+  #loader {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0e0e0e;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: all;
+    transition: opacity 0.6s ease 0.1s, visibility 0.6s ease 0.1s;
+  }
+  #loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+  #loader-word {
+    overflow: hidden;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(10vw, 14vw, 12vw);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #efefef;
+  }
+  #loader-word span {
+    display: block;
+    transform: translateY(110%);
+    animation: revealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  }
+
+  @keyframes revealUp {
+    to { transform: translateY(0); }
+  }
+
+  /* ── Hero section ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    background: #0e0e0e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  #hero.visible { opacity: 1; }
+
+  /* Top bar */
+  .hero-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 2.5rem 2.5rem 0;
+    position: relative;
+    z-index: 10;
+  }
+  .hero-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: #efefef;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .hero-nav {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .hero-nav a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hero-nav a:hover { color: #efefef; }
+
+  /* Role label */
+  .hero-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 0 2.5rem;
+    position: relative;
+    z-index: 10;
+    margin-top: 1.5rem;
+  }
+
+  /* Big name */
+  .hero-name-wrap {
+    position: relative;
+    z-index: 10;
+    padding: 0 1.5rem;
+    margin-top: -0.5rem;
+    overflow: hidden;
+  }
+  .hero-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: clamp(14vw, 17vw, 17vw);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    color: #efefef;
+    display: block;
+    transform: translateY(50px);
+    opacity: 0;
+    animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  }
+  @keyframes fadeSlideUp {
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Scroll + status bottom strip */
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem 2.5rem;
+    position: relative;
+    z-index: 10;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-desc {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    color: #888;
+    max-width: 36%;
+    line-height: 1.6;
+    min-width: 220px;
+    animation: fadeIn 1s ease 1.2s both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.6rem;
+    animation: fadeIn 1s ease 1.3s both;
+  }
+  .badge {
+    border: 1px solid #333;
+    border-radius: 9999px;
+    padding: 0.5rem 1.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .badge.green { color: #4ade80; border-color: #1a3a28; }
+  .badge.gray  { color: #888; }
+  .dot-green {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
+
+  /* Scroll indicator (right side) */
+  .scroll-side {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #888;
+    animation: fadeIn 1s ease 1.4s both;
+  }
+
+  @media (max-width: 768px) {
+    .hero-top { padding: 1.2rem 1.5rem 0; }
+    .hero-nav { display: none; }
+    .hero-role { padding: 0 1.5rem; margin-top: 1.2rem; }
+    .hero-name-wrap { padding: 0 1rem; }
+    .hero-name { font-size: clamp(17vw, 22vw, 22vw); }
+    .hero-bottom { padding: 1rem 1.5rem 1.5rem; }
+    .hero-desc { max-width: 100%; min-width: unset; font-size: 0.7rem; }
+    .hero-badges { align-items: flex-start; }
+    .scroll-side { display: none; }
+  }
+</style>
+
+<!-- Loading screen -->
+<div id="loader">
+  <div id="loader-word"><span>Adithyan B</span></div>
+</div>
+
+<!-- Hero -->
+<section id="hero" aria-label="Introduction">
+  <!-- Top bar (duplicated for hero layout, navbar handles actual nav) -->
+  <div class="hero-top">
+    <a href="#" class="hero-logo">AB</a>
+    <ul class="hero-nav">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </div>
 
-  <div class="relative max-w-6xl mx-auto w-full">
-    <!-- Status badge -->
-    <div
-      class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-white/10 bg-white/3 text-sm font-mono text-text-muted"
-      style="animation-delay: 0.1s"
-    >
-      <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
-      Available for opportunities
-    </div>
+  <p class="hero-role">Full Stack Developer</p>
 
-    <!-- Name -->
-    <h1
-      class="font-display font-extrabold tracking-tighter leading-none mb-4"
-      style="font-size: clamp(3rem, 14vw, 9rem); animation-delay: 0.2s"
-    >
-      <span class="block text-text-primary">Adithyan</span>
-      <span class="block gradient-text">B</span>
-    </h1>
+  <div class="hero-name-wrap">
+    <span class="hero-name">Adithyan</span>
+    <span class="hero-name" style="animation-delay: 1.0s;">B</span>
+  </div>
 
-    <!-- Role -->
-    <div
-      class="flex items-center gap-3 mb-6"
-      style="animation-delay: 0.35s"
-    >
-      <span class="h-px w-12 bg-gradient-to-r from-accent-blue to-accent-violet" aria-hidden="true" />
-      <p class="font-mono text-sm md:text-base text-text-secondary tracking-widest uppercase">
-        Full Stack Developer
-      </p>
-    </div>
-
-    <!-- Description -->
-    <p
-      class="max-w-xl text-lg md:text-xl text-text-secondary leading-relaxed mb-12 font-light"
-      style="animation-delay: 0.45s"
-    >
-      Building scalable web applications and solving real-world problems using modern technologies.
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      B.Tech CSE from SJCET Pala. Experienced in building scalable full-stack applications including medical platforms, AI-powered tools, and business systems.
     </p>
-
-    <!-- CTAs -->
-    <div class="flex flex-wrap gap-4" style="animation-delay: 0.55s">
-      <a
-        href="#projects"
-        class="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-white transition-all duration-300"
-        style="background: linear-gradient(135deg, #3b82f6, #7c3aed); box-shadow: 0 0 30px rgba(124,58,237,0.3)"
-      >
-        View Projects
-        <svg
-          width="16" height="16" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-          class="group-hover:translate-x-1 transition-transform" aria-hidden="true"
-        >
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </a>
-
-      <a
-        href="/adithyan resume.pdf"
-        download
-        class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-text-secondary border border-white/10 hover:border-white/25 hover:text-text-primary transition-all duration-300 backdrop-blur-sm"
-      >
-        <svg
-          width="16" height="16" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" y1="15" x2="12" y2="3" />
-        </svg>
-        Download Resume
-      </a>
-    </div>
-
-    <!-- Socials -->
-    <div class="flex items-center gap-5 mt-12" style="animation-delay: 0.65s">
-      <span class="text-sm text-text-muted font-mono">find me on</span>
-      <a
-        href="https://github.com/addithyan"
-        target="_blank" rel="noopener noreferrer"
-        class="text-text-muted hover:text-text-primary transition-colors"
-        aria-label="GitHub profile"
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-        </svg>
-      </a>
-      <a
-        href="https://linkedin.com/in/adithyan-b-637a66229"
-        target="_blank" rel="noopener noreferrer"
-        class="text-text-muted hover:text-text-primary transition-colors"
-        aria-label="LinkedIn profile"
-      >
-        <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-        </svg>
-      </a>
-      <a
-        href="mailto:adithyanb12b@gmail.com"
-        class="text-text-muted hover:text-text-primary transition-colors"
-        aria-label="Email Adithyan"
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="4" width="20" height="16" rx="2" />
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-        </svg>
-      </a>
+    <div class="hero-badges">
+      <div class="badge green"><span class="dot-green"></span>Available for work</div>
+      <div class="badge gray">Kottayam, Kerala</div>
     </div>
   </div>
 
-  <!-- Scroll hint -->
-  <div
-    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-    aria-hidden="true"
-  >
-    <span class="text-xs text-text-muted font-mono tracking-wider">scroll</span>
-    <div class="w-px h-10 bg-gradient-to-b from-text-muted to-transparent" />
-  </div>
+  <div class="scroll-side" aria-hidden="true">Scroll</div>
 </section>
+
+<script>
+  // Dismiss loader after animation, reveal hero
+  window.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('loader');
+    const hero   = document.getElementById('hero');
+    setTimeout(() => {
+      loader?.classList.add('done');
+      hero?.classList.add('visible');
+    }, 1100);
+  });
+</script>

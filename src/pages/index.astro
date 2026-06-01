@@ -14,9 +14,9 @@ import '../styles/global.css';
   title="Adithyan B — Full Stack Developer"
   description="Full Stack Developer building scalable web applications with Django, React, FastAPI and modern technologies. Based in Kerala, India."
 >
-  <Navbar />
+  <!-- Navbar sits fixed, hidden on hero (hero has its own top bar) -->
+  <Hero />
   <main id="main-content">
-    <Hero />
     <About />
     <Experience />
     <Projects />
@@ -24,3 +24,25 @@ import '../styles/global.css';
   </main>
   <Footer />
 </BaseLayout>
+
+<style is:global>
+  /* Global reveal utility */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+
+<script>
+  // Single IntersectionObserver for all .reveal elements
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>

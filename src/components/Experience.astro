@@ -1,5 +1,5 @@
 ---
-type Experience = {
+type Exp = {
   role: string;
   company: string;
   companyUrl?: string;
@@ -8,7 +8,7 @@ type Experience = {
   bullets: string[];
 };
 
-const experiences: Experience[] = [
+const experiences: Exp[] = [
   {
     role: 'Full Stack Developer',
     company: 'Grey Codes Solutions LLC',
@@ -16,9 +16,9 @@ const experiences: Experience[] = [
     period: 'Feb 2026 – Present',
     current: true,
     bullets: [
-      'Developed scalable web applications using Django, React, and REST APIs',
-      'Built backend logic, integrated databases, and created responsive UIs, delivering projects on time',
-      'Optimized features, resolved bugs, and ensured smooth deployment using Git',
+      'Developed scalable web applications using Django, React, and REST APIs.',
+      'Built backend logic, integrated databases, and created responsive UIs, delivering projects on time.',
+      'Optimized features, resolved bugs, and ensured smooth deployment using Git.',
     ],
   },
   {
@@ -28,109 +28,195 @@ const experiences: Experience[] = [
     period: 'Aug 2025 – Feb 2026',
     current: false,
     bullets: [
-      'Provided technical support and resolved application issues in real time',
-      'Debugged backend and frontend issues, resolved bugs, and monitored system performance',
-      'Utilized Git for version control and ensured seamless integration',
+      'Provided technical support and resolved application issues in real time.',
+      'Debugged backend and frontend issues, resolved bugs, and monitored system performance.',
+      'Utilized Git for version control and ensured seamless integration.',
     ],
   },
 ];
 ---
 
-<section
-  id="experience"
-  class="py-28 px-6 bg-surface-1/30"
-  aria-labelledby="experience-heading"
->
-  <div class="max-w-6xl mx-auto">
-    <div class="section-reveal">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="font-mono text-xs text-accent-violet tracking-widest uppercase">02 / Experience</span>
-        <span class="h-px flex-1 bg-white/5" aria-hidden="true" />
-      </div>
+<style>
+  #work {
+    background: #f1faee;
+    color: #000;
+    padding: 0 0 5rem;
+  }
+  .exp-title {
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    padding: 5rem 0 4rem;
+    color: #000;
+  }
 
-      <h2
-        id="experience-heading"
-        class="font-display text-4xl md:text-5xl font-bold text-text-primary mb-14 tracking-tight"
-      >
-        Where I've <span class="gradient-text">worked</span>
-      </h2>
+  /* Timeline */
+  .timeline-wrap {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  /* The grey track */
+  .tl-track {
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    transform: translateX(-50%);
+    width: 1px;
+    background: #d0d0d0;
+    display: block;
+  }
+  /* The black fill that grows on scroll */
+  .tl-fill {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    background: #000;
+    height: 0;
+    transition: height 0.06s linear;
+  }
 
-      <div class="relative">
-        <!-- Timeline line -->
-        <div
-          class="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-accent-blue/50 via-accent-violet/30 to-transparent ml-[7px]"
-          aria-hidden="true"
-        />
+  .tl-items { display: flex; flex-direction: column; gap: 6rem; }
 
-        <div class="space-y-10">
-          {
-            experiences.map((exp) => (
-              <article class="md:pl-10 relative group">
-                <!-- Dot -->
-                <div
-                  class="hidden md:block absolute left-0 top-2 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 group-hover:scale-125"
-                  style={exp.current
-                    ? 'border-color: #3b82f6; background: #3b82f6; box-shadow: 0 0 12px rgba(59,130,246,0.5);'
-                    : 'border-color: #3b3b55; background: #0a0a0f;'}
-                  aria-hidden="true"
-                />
+  /* Each card row */
+  .tl-card-row {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  /* Odd rows: card on RIGHT */
+  .tl-card-row.right { flex-direction: row-reverse; }
 
-                <div class="experience-card p-6 md:p-8 rounded-2xl border border-white/6 bg-surface-1/50 transition-all duration-300 cursor-default">
-                  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6">
-                    <div>
-                      <h3 class="text-lg font-semibold text-text-primary font-display">{exp.role}</h3>
-                      {exp.companyUrl ? (
-                        <a
-                          href={exp.companyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="text-sm text-text-muted mt-0.5 hover:text-accent-blue transition-colors duration-200 inline-flex items-center gap-1 group/link"
-                        >
-                          {exp.company}
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-hover/link:opacity-100 transition-opacity" aria-hidden="true">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                            <polyline points="15 3 21 3 21 9"/>
-                            <line x1="10" y1="14" x2="21" y2="3"/>
-                          </svg>
-                        </a>
-                      ) : (
-                        <p class="text-sm text-text-muted mt-0.5">{exp.company}</p>
-                      )}
-                    </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                      {exp.current && (
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-accent-blue/10 text-accent-blue border border-accent-blue/20">
-                          <span class="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" aria-hidden="true" />
-                          Current
-                        </span>
-                      )}
-                      <span class="px-3 py-1 rounded-full text-xs text-text-muted border border-white/6 bg-white/3 font-mono">
-                        {exp.period}
-                      </span>
-                    </div>
-                  </div>
+  /* Dot on the center line */
+  .tl-dot {
+    position: absolute;
+    left: 50%;
+    top: 1.8rem;
+    transform: translateX(-50%);
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #000;
+    border: 4px solid #f1faee;
+    z-index: 10;
+    transition: transform 0.3s ease;
+  }
 
-                  <ul class="space-y-3" role="list">
-                    {exp.bullets.map((bullet) => (
-                      <li class="flex gap-3 text-sm text-text-secondary leading-relaxed">
-                        <span
-                          class="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-accent-violet/60"
-                          aria-hidden="true"
-                        />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))
-          }
+  /* Card */
+  .tl-card {
+    width: 45%;
+    background: #fff;
+    border-radius: 1.25rem;
+    padding: 2rem 2rem 1.75rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  .tl-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem; }
+  .card-company { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: #000; }
+  .card-role    { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; color: #666; font-weight: 500; margin-top: 0.15rem; }
+  .card-company a { color: inherit; text-decoration: none; }
+  .card-company a:hover { text-decoration: underline; }
+  .card-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: #000;
+    color: #fff;
+    border-radius: 9999px;
+    padding: 0.35rem 0.85rem;
+    white-space: nowrap;
+  }
+  .card-period.current { background: #0d6e50; }
+
+  .card-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+  .card-bullets li {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    color: #444;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.5;
+  }
+  .card-bullets li::before { content: '•'; color: #000; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tl-track  { left: 1rem; transform: none; }
+    .tl-dot    { left: 1rem; transform: translateX(-50%); }
+    .tl-card-row,
+    .tl-card-row.right { flex-direction: column; padding-left: 2.5rem; }
+    .tl-card   { width: 100%; }
+  }
+  @media (max-width: 480px) {
+    .timeline-wrap { padding: 0 1rem; }
+    .card-company  { font-size: 1.15rem; }
+    .tl-card       { padding: 1.25rem; }
+  }
+</style>
+
+<section id="work">
+  <h2 class="exp-title reveal">My Journey</h2>
+
+  <div class="timeline-wrap">
+    <div class="tl-track" id="tl-track" aria-hidden="true">
+      <div class="tl-fill" id="tl-fill"></div>
+    </div>
+
+    <div class="tl-items">
+      {experiences.map((exp, i) => (
+        <div class={`tl-card-row ${i % 2 === 0 ? '' : 'right'}`}>
+          <div class="tl-dot" aria-hidden="true"></div>
+          <article class="tl-card reveal">
+            <div class="card-header">
+              <div>
+                <p class="card-company">
+                  {exp.companyUrl
+                    ? <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer">{exp.company}</a>
+                    : exp.company}
+                </p>
+                <p class="card-role">{exp.role}</p>
+              </div>
+              <span class={`card-period ${exp.current ? 'current' : ''}`}>{exp.period}</span>
+            </div>
+            <ul class="card-bullets">
+              {exp.bullets.map(b => <li>{b}</li>)}
+            </ul>
+          </article>
         </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
 
-<style>
-  /* No hover effects — static premium cards */
-</style>
+<script>
+  // Scroll-driven timeline fill
+  const track = document.getElementById('tl-track');
+  const fill  = document.getElementById('tl-fill');
+
+  function updateFill() {
+    if (!track || !fill) return;
+    const rect = track.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const trackH = rect.height;
+    // How far we've scrolled into the track
+    const scrolled = Math.max(0, Math.min(trackH, vh * 0.5 - rect.top));
+    fill.style.height = scrolled + 'px';
+  }
+
+  window.addEventListener('scroll', updateFill, { passive: true });
+  updateFill();
+
+  // Reveal on scroll
+  const revealObs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>

@@ -2,21 +2,59 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="py-10 px-6 border-t border-white/5" aria-label="Site footer">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <span class="font-display font-bold gradient-text text-lg">AB</span>
-      <span class="text-text-muted text-xs font-mono">Adithyan B · Full Stack Developer</span>
-    </div>
+<style>
+  footer {
+    background: #19191c;
+    border-top: 1px solid #2e2e32;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: #efefef;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: #555;
+    letter-spacing: 0.08em;
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: #555;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: #efefef; }
 
-    <p class="text-text-muted text-xs font-mono text-center">
-      © {year} · Built with Astro & Tailwind CSS
-    </p>
+  @media (max-width: 600px) {
+    footer { flex-direction: column; align-items: flex-start; padding: 1.5rem 1.5rem; }
+    .footer-links { gap: 1.5rem; }
+  }
+</style>
 
-    <nav class="flex items-center gap-5" aria-label="Footer navigation">
-      <a href="#about" class="text-xs text-text-muted hover:text-text-secondary transition-colors">About</a>
-      <a href="#projects" class="text-xs text-text-muted hover:text-text-secondary transition-colors">Projects</a>
-      <a href="#contact" class="text-xs text-text-muted hover:text-text-secondary transition-colors">Contact</a>
-    </nav>
-  </div>
+<footer>
+  <a href="#" class="footer-logo">AB</a>
+  <p class="footer-copy">© {year} Adithyan B · Built with Astro</p>
+  <nav class="footer-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </footer>
