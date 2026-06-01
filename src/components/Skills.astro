@@ -1,0 +1,359 @@
+---
+---
+
+<style>
+  #skills {
+    background: #0e0e0e;
+    color: #efefef;
+    padding: 6rem 0 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle dot grid */
+  #skills::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .skills-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Header ── */
+  .skills-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .skills-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #15616D;
+    margin-bottom: 0.5rem;
+  }
+  .skills-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: #efefef;
+    line-height: 1;
+  }
+  .skills-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: #333;
+    letter-spacing: 0.1em;
+    padding-bottom: 0.2rem;
+  }
+
+  /* ── Rows ── */
+  .skills-rows {
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: center;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 1.75rem 0;
+    gap: 2.5rem;
+    transition: background 0.25s ease;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 4px;
+    cursor: default;
+  }
+  .skill-row:hover {
+    background: rgba(255,255,255,0.02);
+  }
+  .skill-row:hover .row-num { color: #15616D; }
+
+  /* Left: label */
+  .row-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .row-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: #333;
+    transition: color 0.25s;
+  }
+  .row-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #efefef;
+  }
+
+  /* Right: pills */
+  .row-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .s-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    color: #666;
+    border: 1px solid #1e1e1e;
+    border-radius: 4px;
+    padding: 0.4rem 0.85rem;
+    background: transparent;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+  .s-pill:hover {
+    color: #efefef;
+    border-color: #333;
+    background: rgba(255,255,255,0.03);
+  }
+  .s-pill.hi {
+    color: #15616D;
+    border-color: rgba(21,97,109,0.35);
+    background: rgba(21,97,109,0.05);
+  }
+  .s-pill.hi:hover {
+    color: #1a7a8a;
+    border-color: rgba(21,97,109,0.6);
+    background: rgba(21,97,109,0.1);
+  }
+
+  /* ── Soft skills ── */
+  .soft-row {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .soft-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #333;
+    flex-shrink: 0;
+  }
+  .soft-pill {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #555;
+    border: 1px solid #1e1e1e;
+    border-radius: 9999px;
+    padding: 0.3rem 1.1rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .soft-pill:hover { color: #efefef; border-color: #444; }
+
+  /* ── Marquee ── */
+  .marquee-wrap {
+    margin-top: 3rem;
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 0.9rem 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .marquee-wrap::before,
+  .marquee-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; width: 80px;
+    z-index: 2; pointer-events: none;
+  }
+  .marquee-wrap::before { left: 0;  background: linear-gradient(to right, #0e0e0e, transparent); }
+  .marquee-wrap::after  { right: 0; background: linear-gradient(to left,  #0e0e0e, transparent); }
+
+  .marquee-track {
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
+    animation: mscroll 30s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+
+  @keyframes mscroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .m-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #2a2a2a;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .m-dot {
+    display: inline-block;
+    width: 3px; height: 3px;
+    background: #15616D;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .skill-row {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 1.25rem 0.5rem;
+    }
+    .skills-inner { padding: 0 1rem; }
+  }
+</style>
+
+<section id="skills">
+  <div class="skills-inner">
+
+    <div class="skills-header reveal">
+      <div>
+        <p class="skills-label">Technical Profile</p>
+        <h2 class="skills-heading">Stack &amp; Skills</h2>
+      </div>
+      <span class="skills-count">// 04 categories</span>
+    </div>
+
+    <div class="skills-rows reveal">
+
+      <div class="skill-row">
+        <div class="row-meta">
+          <span class="row-num">01 · Languages</span>
+          <span class="row-name">Core Languages</span>
+        </div>
+        <div class="row-pills">
+          <span class="s-pill hi">Python</span>
+          <span class="s-pill">C</span>
+          <span class="s-pill">Java</span>
+          <span class="s-pill hi">SQL</span>
+          <span class="s-pill">HTML</span>
+          <span class="s-pill">CSS</span>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="row-meta">
+          <span class="row-num">02 · Frameworks</span>
+          <span class="row-name">Frameworks &amp; Libraries</span>
+        </div>
+        <div class="row-pills">
+          <span class="s-pill hi">React</span>
+          <span class="s-pill hi">Django</span>
+          <span class="s-pill hi">FastAPI</span>
+          <span class="s-pill">REST APIs</span>
+          <span class="s-pill">Celery</span>
+          <span class="s-pill">FAISS</span>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="row-meta">
+          <span class="row-num">03 · Tools &amp; Platforms</span>
+          <span class="row-name">Tools &amp; Platforms</span>
+        </div>
+        <div class="row-pills">
+          <span class="s-pill hi">Git</span>
+          <span class="s-pill">GitHub</span>
+          <span class="s-pill">Postman</span>
+          <span class="s-pill">VS Code</span>
+          <span class="s-pill">Linux</span>
+          <span class="s-pill hi">Redis</span>
+          <span class="s-pill">Firebase</span>
+          <span class="s-pill hi">MySQL</span>
+          <span class="s-pill">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="row-meta">
+          <span class="row-num">04 · AI / ML</span>
+          <span class="row-name">AI &amp; ML</span>
+        </div>
+        <div class="row-pills">
+          <span class="s-pill hi">LLaMA 3.1</span>
+          <span class="s-pill hi">RAG</span>
+          <span class="s-pill">Ollama</span>
+          <span class="s-pill">BAAI/bge-m3</span>
+          <span class="s-pill">Prompt Eng.</span>
+          <span class="s-pill">GenAI</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="soft-row reveal">
+      <span class="soft-label">Soft Skills //</span>
+      <span class="soft-pill">Collaboration</span>
+      <span class="soft-pill">Adaptability</span>
+      <span class="soft-pill">Active Learning</span>
+    </div>
+
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <span class="m-item">Python<span class="m-dot"></span></span>
+        <span class="m-item">React<span class="m-dot"></span></span>
+        <span class="m-item">Django<span class="m-dot"></span></span>
+        <span class="m-item">FastAPI<span class="m-dot"></span></span>
+        <span class="m-item">MySQL<span class="m-dot"></span></span>
+        <span class="m-item">Redis<span class="m-dot"></span></span>
+        <span class="m-item">LLaMA 3.1<span class="m-dot"></span></span>
+        <span class="m-item">RAG<span class="m-dot"></span></span>
+        <span class="m-item">Firebase<span class="m-dot"></span></span>
+        <span class="m-item">Git<span class="m-dot"></span></span>
+        <span class="m-item">Linux<span class="m-dot"></span></span>
+        <span class="m-item">REST APIs<span class="m-dot"></span></span>
+        <span class="m-item">FAISS<span class="m-dot"></span></span>
+        <span class="m-item">MongoDB<span class="m-dot"></span></span>
+        <span class="m-item">Python<span class="m-dot"></span></span>
+        <span class="m-item">React<span class="m-dot"></span></span>
+        <span class="m-item">Django<span class="m-dot"></span></span>
+        <span class="m-item">FastAPI<span class="m-dot"></span></span>
+        <span class="m-item">MySQL<span class="m-dot"></span></span>
+        <span class="m-item">Redis<span class="m-dot"></span></span>
+        <span class="m-item">LLaMA 3.1<span class="m-dot"></span></span>
+        <span class="m-item">RAG<span class="m-dot"></span></span>
+        <span class="m-item">Firebase<span class="m-dot"></span></span>
+        <span class="m-item">Git<span class="m-dot"></span></span>
+        <span class="m-item">Linux<span class="m-dot"></span></span>
+        <span class="m-item">REST APIs<span class="m-dot"></span></span>
+        <span class="m-item">FAISS<span class="m-dot"></span></span>
+        <span class="m-item">MongoDB<span class="m-dot"></span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
