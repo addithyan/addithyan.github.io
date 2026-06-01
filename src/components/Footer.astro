@@ -45,7 +45,7 @@ const year = new Date().getFullYear();
 
   @media (max-width: 600px) {
     footer { flex-direction: column; align-items: flex-start; padding: 1.5rem 1.5rem; }
-    .footer-links { gap: 1.5rem; }
+    .footer-links { gap: 1.5rem; flex-wrap: wrap; }
   }
 </style>
 
@@ -53,8 +53,9 @@ const year = new Date().getFullYear();
   <a href="#" class="footer-logo">AB</a>
   <p class="footer-copy">© {year} Adithyan B · Built with Astro</p>
   <nav class="footer-links">
-    <a href="#work">Work</a>
     <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </nav>
 </footer>

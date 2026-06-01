@@ -196,8 +196,38 @@
     text-align: center;
     display: none;
   }
-  .form-msg.success { background: rgba(74,222,128,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
-  .form-msg.error   { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+  .form-msg.error { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+
+  /* Toast */
+  #contact-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: rgba(74,222,128,0.12);
+    color: #4ade80;
+    border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 10px;
+    padding: 0.85rem 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  #contact-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #contact-toast svg { flex-shrink: 0; }
 
   @media (max-width: 900px) {
     .contact-inner { width: 90%; }
@@ -208,6 +238,7 @@
     .form-grid { grid-template-columns: 1fr; }
     .contact-btns { gap: 0.75rem; }
     .contact-btn { font-size: 0.85rem; padding: 0.7rem 1.25rem; }
+    #contact-toast { width: calc(100vw - 3rem); }
   }
 </style>
 
@@ -276,12 +307,19 @@
           </svg>
         </button>
 
-        <div class="form-msg success" id="form-success">Message sent! I'll get back to you soon.</div>
-        <div class="form-msg error"   id="form-error">Something went wrong. Please email me directly.</div>
+        <div class="form-msg error" id="form-error">Something went wrong. Please email me directly.</div>
       </form>
     </div>
   </div>
 </section>
+
+<!-- Toast -->
+<div id="contact-toast" role="status" aria-live="polite">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+  Message sent! I'll get back to you soon.
+</div>
 
 <style>
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -300,13 +338,22 @@
   const submitBtn  = document.getElementById('submit-btn')     as HTMLButtonElement;
   const btnText    = document.getElementById('btn-text')       as HTMLElement;
   const btnSpin    = document.getElementById('btn-spin')       as HTMLElement;
-  const successEl  = document.getElementById('form-success')   as HTMLElement;
   const errorEl    = document.getElementById('form-error')     as HTMLElement;
+  const toast      = document.getElementById('contact-toast')  as HTMLElement;
+
+  let toastTimer: ReturnType<typeof setTimeout>;
+
+  function showToast() {
+    clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 5000);
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    successEl.style.display = 'none';
-    errorEl.style.display   = 'none';
+    errorEl.style.display = 'none';
 
     const name  = (form.from_name as HTMLInputElement).value.trim();
     const email = (form.from_email as HTMLInputElement).value.trim();
@@ -325,7 +372,7 @@
 
     try {
       await (window as any).emailjs.sendForm('service_vh117rv', 'template_2q6ewjt', form);
-      successEl.style.display = 'block';
+      showToast();
       form.reset();
     } catch {
       errorEl.textContent = 'Something went wrong. Please email me directly.';
