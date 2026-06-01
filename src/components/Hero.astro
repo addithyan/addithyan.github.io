@@ -82,6 +82,64 @@
   }
   .hero-nav a:hover { color: #efefef; }
 
+  /* Mobile burger in hero */
+  #hero-burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 600;
+  }
+  #hero-burger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: #efefef;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  #hero-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  #hero-burger.open span:nth-child(2) { opacity: 0; }
+  #hero-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  #hero-drawer {
+    display: none;
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: min(280px, 80vw);
+    background: #141414;
+    border-left: 1px solid #222;
+    z-index: 550;
+    padding: 5rem 2rem 2rem;
+    flex-direction: column;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  #hero-drawer.open { transform: translateX(0); }
+  #hero-drawer a {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  #hero-drawer a:hover { color: #efefef; }
+  #hero-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 540;
+    backdrop-filter: blur(4px);
+  }
+  #hero-overlay.open { display: block; }
+
   /* Role label */
   .hero-role {
     font-family: 'DM Mono', monospace;
@@ -195,6 +253,8 @@
   @media (max-width: 768px) {
     .hero-top { padding: 1.2rem 1.5rem 0; }
     .hero-nav { display: none; }
+    #hero-burger { display: flex; }
+    #hero-drawer { display: flex; }
     .hero-role { padding: 0 1.5rem; margin-top: 1.2rem; }
     .hero-name-wrap { padding: 0 1rem; }
     .hero-name { font-size: clamp(17vw, 22vw, 22vw); }
@@ -221,6 +281,10 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+
+    <button id="hero-burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 
   <p class="hero-role">Full Stack Developer</p>
@@ -243,6 +307,14 @@
   <div class="scroll-side" aria-hidden="true">Scroll</div>
 </section>
 
+<div id="hero-overlay"></div>
+<div id="hero-drawer">
+  <a href="#about" class="hero-drawer-link">About</a>
+  <a href="#experience" class="hero-drawer-link">Experience</a>
+  <a href="#projects" class="hero-drawer-link">Projects</a>
+  <a href="#contact" class="hero-drawer-link">Contact</a>
+</div>
+
 <script>
   // Dismiss loader after animation, reveal hero
   window.addEventListener('DOMContentLoaded', () => {
@@ -252,5 +324,26 @@
       loader?.classList.add('done');
       hero?.classList.add('visible');
     }, 1100);
+  });
+
+  // Mobile burger menu
+  const heroBurger  = document.getElementById('hero-burger');
+  const heroDrawer  = document.getElementById('hero-drawer');
+  const heroOverlay = document.getElementById('hero-overlay');
+  let menuOpen = false;
+
+  function toggleHeroMenu(state: boolean) {
+    menuOpen = state;
+    heroBurger?.classList.toggle('open', menuOpen);
+    heroDrawer?.classList.toggle('open', menuOpen);
+    heroOverlay?.classList.toggle('open', menuOpen);
+    heroBurger?.setAttribute('aria-expanded', String(menuOpen));
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }
+
+  heroBurger?.addEventListener('click', () => toggleHeroMenu(!menuOpen));
+  heroOverlay?.addEventListener('click', () => toggleHeroMenu(false));
+  document.querySelectorAll('.hero-drawer-link').forEach(link => {
+    link.addEventListener('click', () => toggleHeroMenu(false));
   });
 </script>
